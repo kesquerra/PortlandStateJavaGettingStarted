@@ -557,30 +557,14 @@ creating a `gh-pages` branch (from the initial revision of the
 repository), removing the `README.md` file on that branch (because
 it will take precedence over the generated `index.html` file), 
 removing `*.zip` from `.gitignore` (because the Maven process will add
-.zip files to the `gh-pages` branch) and pushing it to GitHub:
+.zip files to the `gh-pages` branch) and pushing it to GitHub.
 
-```
-$ git checkout 62fc42c5b0cf4ddddf78e7568b008bedc9037b38
-$ git branch gh-pages
-$ git rm README.md
-$ git add .gitignore
-$ git commit -m "Remove README.md on gh-pages branch" README.md
-$ git push --set-upstream origin gh-pages
-$ git checkout main
-```
-
-Then, you can generate and publish your website using the below
-commands.  Note that before you can do this, you must replace
+Then, you can generate and publish your website using the `gh-pages-deploy.sh`
+script. Note that before you can do this, you must replace
 instances of `YourGitHubUser` with your GitHub username in the
 top-level (parent) `pom.xml` file.  (Note that it is essential that
 your GitHub id be **lowercase letters** in the
 `distributionManagement/url` section of the `pom.xml` file.)
-
-```
-$ ./mvnw site
-$ ./mvnw site:stage                  # Gathers site files across multiple projects
-$ ./mvnw scm-publish:publish-scm     # Uploads to GitHub
-```
 
 You can open `target/staging/index.html` in your web browse to see
 what your site will look like.
